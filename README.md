@@ -27,13 +27,15 @@ flowchart LR
 flowchart TD
   A[Load App] --> B[GET /catalog]
   B --> C{User picks tool card?}
-  C -- Formula 1 --> D[Render form (a,b)]
-  D --> E[Submit] --> F[POST /tools/invoke]
-  F --> G[Validate/Auth] --> H{Adapter}
-  H -- Local --> I[services.formula_1]
-  H -- MCP --> J[MCP call formula_1]
+  C -->|Formula 1| D[Render form (a,b)]
+  D --> E[Submit]
+  E --> F[POST tools/invoke]
+  F --> G[Validate/Auth]
+  G --> H{Adapter}
+  H -->|Local| I[services.formula_1]
+  H -->|MCP| J[MCP call formula_1]
   I --> K[Result]
-  J --> K
+  J --> K[Result]
   K --> L[Return to FE]
 ```
 
